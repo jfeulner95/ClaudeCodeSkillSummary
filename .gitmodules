@@ -1,0 +1,9 @@
+[submodule "agent-skills"]
+	path = agent-skills
+	url = git@github.com:addyosmani/agent-skills.git
+[submodule "ponytail"]
+	path = ponytail
+	url = git@github.com:DietrichGebert/ponytail.git
+[submodule "andrej-karpathy-skills"]
+	path = andrej-karpathy-skills
+	url = git@github.com:multica-ai/andrej-karpathy-skills.git
