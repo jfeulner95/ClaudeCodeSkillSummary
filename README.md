@@ -10,7 +10,23 @@ A collection of useful Claude Code skills, included as git submodules:
 
 ## Install
 
-### 1. Clone with submodules
+### Quick install with npx (skills only)
+
+Requires [Node.js](https://nodejs.org). The [skills CLI](https://github.com/vercel-labs/skills) downloads the skills straight from GitHub, no clone needed:
+
+```bash
+npx skills add addyosmani/agent-skills --agent claude-code --global
+npx skills add multica-ai/andrej-karpathy-skills --agent claude-code --global
+npx skills add DietrichGebert/ponytail --agent claude-code --global --skill '*'
+```
+
+- `--global` installs for your user (all projects); leave it out to install into the current project only.
+- Add `--list` to see the skills of a repo first, or `--skill <name>` to install a single one.
+- This installs **skills only**, not the subagents. For those, use the manual install below (step 2, last command).
+
+### Manual install
+
+#### 1. Clone with submodules
 
 ```bash
 git clone --recurse-submodules <this-repo-url>
@@ -19,7 +35,7 @@ cd CaudeCodeSkillSummary
 git submodule update --init --recursive
 ```
 
-### 2. Copy skills and agents into Claude Code
+#### 2. Copy skills and agents into Claude Code
 
 Skills go to `~/.claude/skills/`, subagents to `~/.claude/agents/`.
 They are then available in every project.
@@ -44,7 +60,7 @@ Copy-Item -Force agent-skills\agents\*.md "$HOME\.claude\agents\"
 
 > Per-project instead of global? Copy into `<your-project>/.claude/skills/` and `.claude/agents/`.
 
-### 3. Verify
+### Verify
 
 Restart Claude Code, then type `/` — the skills (e.g. `/ponytail`, `/karpathy-guidelines`, `/test-driven-development`) should be listed. Run `/agents` to see the subagents.
 
@@ -66,7 +82,7 @@ Then pick the plugins in `/plugin`. Use either plugins **or** the copied files, 
 git submodule update --remote --merge
 ```
 
-Then repeat step 2.
+Then repeat step 2 (or re-run the `npx skills add` commands).
 
 ## License
 
