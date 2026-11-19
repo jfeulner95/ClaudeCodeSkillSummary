@@ -1,12 +1,13 @@
 # Claude Code Skill Summary
 
-A collection of useful Claude Code skills, included as git submodules:
+A collection of useful Claude Code skills and plugins, included as git submodules:
 
 | Folder | Source | What you get |
 |---|---|---|
 | `agent-skills/` | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | 25 engineering workflow skills (TDD, debugging, code review, specs, ...) + 4 subagents |
 | `andrej-karpathy-skills/` | [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) | `karpathy-guidelines` skill (avoid common LLM coding mistakes) |
 | `ponytail/` | [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | `ponytail` "smallest change that works" skill + audit/review/debt helpers |
+| `claude-mem/` | [thedotmack/claude-mem](https://github.com/thedotmack/claude-mem) | Persistent memory plugin: hooks capture each session, context is injected into the next one |
 
 ## Install
 
@@ -23,6 +24,23 @@ npx skills add DietrichGebert/ponytail --agent claude-code --global --skill '*'
 - `--global` installs for your user (all projects); leave it out to install into the current project only.
 - Add `--list` to see the skills of a repo first, or `--skill <name>` to install a single one.
 - This installs **skills only**, not the subagents. For those, use the manual install below (step 2, last command).
+
+### claude-mem (plugin)
+
+claude-mem needs hooks and a background worker, so copying files is not enough. Install it with its own installer:
+
+```bash
+npx claude-mem install
+```
+
+or inside Claude Code:
+
+```
+/plugin marketplace add thedotmack/claude-mem
+/plugin install claude-mem
+```
+
+Memory is stored locally in `~/.claude-mem`. Anonymous usage analytics are on by default; turn them off with `npx claude-mem telemetry disable`. See the [claude-mem README](claude-mem/README.md) for providers and the optional sign-in.
 
 ### Manual install
 
@@ -72,6 +90,7 @@ Each repo also ships a Claude Code plugin marketplace, which brings hooks and co
 /plugin marketplace add addyosmani/agent-skills
 /plugin marketplace add multica-ai/andrej-karpathy-skills
 /plugin marketplace add DietrichGebert/ponytail
+/plugin marketplace add thedotmack/claude-mem
 ```
 
 Then pick the plugins in `/plugin`. Use either plugins **or** the copied files, not both, to avoid duplicate skills.
@@ -87,7 +106,8 @@ Then repeat step 2 (or re-run the `npx skills add` commands).
 ## License
 
 The files in this repository are licensed under [MIT](LICENSE).
-The submodules are separate projects under their own licenses (all MIT at the time of writing):
+The submodules are separate projects under their own licenses (MIT, except claude-mem under Apache 2.0, at the time of writing):
 [agent-skills](agent-skills/LICENSE) © Addy Osmani,
 [ponytail](ponytail/LICENSE) © DietrichGebert,
-[andrej-karpathy-skills](andrej-karpathy-skills/README.md#license) © multica-ai.
+[andrej-karpathy-skills](andrej-karpathy-skills/README.md#license) © multica-ai,
+[claude-mem](claude-mem/LICENSE) © Alex Newman.

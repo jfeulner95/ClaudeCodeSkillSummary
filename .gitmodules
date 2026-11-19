@@ -7,3 +7,6 @@
 [submodule "andrej-karpathy-skills"]
 	path = andrej-karpathy-skills
 	url = git@github.com:multica-ai/andrej-karpathy-skills.git
+[submodule "claude-mem"]
+	path = claude-mem
+	url = git@github.com:thedotmack/claude-mem.git
