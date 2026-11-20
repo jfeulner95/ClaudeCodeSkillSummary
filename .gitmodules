@@ -10,3 +10,12 @@
 [submodule "claude-mem"]
 	path = claude-mem
 	url = git@github.com:thedotmack/claude-mem.git
+[submodule "context-mode"]
+	path = context-mode
+	url = git@github.com:mksglu/context-mode.git
+[submodule "vercel-labs/skills"]
+	path = vercel-labs/skills
+	url = git@github.com:vercel-labs/skills.git
+[submodule "claude-howto"]
+	path = claude-howto
+	url = git@github.com:luongnv89/claude-howto.git
