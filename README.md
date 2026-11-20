@@ -7,6 +7,7 @@ A collection of useful Claude Code skills and plugins, included as git submodule
 | `agent-skills/` | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | 25 engineering workflow skills (TDD, debugging, code review, specs, ...) + 4 subagents |
 | `andrej-karpathy-skills/` | [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) | `karpathy-guidelines` skill (avoid common LLM coding mistakes) |
 | `ponytail/` | [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | `ponytail` "smallest change that works" skill + audit/review/debt helpers |
+| `humanizer/` | [blader/humanizer](https://github.com/blader/humanizer) | `humanizer` skill: rewrites AI-sounding text so it reads like a person wrote it |
 | `claude-mem/` | [thedotmack/claude-mem](https://github.com/thedotmack/claude-mem) | Persistent memory plugin: hooks capture each session, context is injected into the next one |
 | `context-mode/` | [mksglu/context-mode](https://github.com/mksglu/context-mode) | Plugin that keeps large tool output out of the context window (local sandbox + SQLite index, MCP tools) |
 | `vercel-labs/skills/` | [vercel-labs/skills](https://github.com/vercel-labs/skills) | Source of the `npx skills` CLI used below + `find-skills` skill |
@@ -22,6 +23,7 @@ Requires [Node.js](https://nodejs.org). The [skills CLI](https://github.com/verc
 npx skills add addyosmani/agent-skills --agent claude-code --global
 npx skills add multica-ai/andrej-karpathy-skills --agent claude-code --global
 npx skills add DietrichGebert/ponytail --agent claude-code --global --skill '*'
+npx skills add blader/humanizer --agent claude-code --global
 npx skills add vercel-labs/skills --agent claude-code --global --skill find-skills
 ```
 
@@ -85,6 +87,7 @@ They are then available in every project.
 mkdir -p ~/.claude/skills ~/.claude/agents
 cp -r agent-skills/skills/* andrej-karpathy-skills/skills/* ~/.claude/skills/
 cp -r ponytail/skills/*/ ~/.claude/skills/
+mkdir -p ~/.claude/skills/humanizer && cp humanizer/SKILL.md ~/.claude/skills/humanizer/
 cp agent-skills/agents/*.md ~/.claude/agents/
 ```
 
@@ -94,6 +97,7 @@ cp agent-skills/agents/*.md ~/.claude/agents/
 New-Item -ItemType Directory -Force "$HOME\.claude\skills", "$HOME\.claude\agents" | Out-Null
 Copy-Item -Recurse -Force agent-skills\skills\*, andrej-karpathy-skills\skills\* "$HOME\.claude\skills\"
 Get-ChildItem ponytail\skills -Directory | Copy-Item -Recurse -Force -Destination "$HOME\.claude\skills\"
+New-Item -ItemType Directory -Force "$HOME\.claude\skills\humanizer" | Out-Null; Copy-Item -Force humanizer\SKILL.md "$HOME\.claude\skills\humanizer\"
 Copy-Item -Force agent-skills\agents\*.md "$HOME\.claude\agents\"
 ```
 
@@ -101,7 +105,7 @@ Copy-Item -Force agent-skills\agents\*.md "$HOME\.claude\agents\"
 
 ### Verify
 
-Restart Claude Code, then type `/` — the skills (e.g. `/ponytail`, `/karpathy-guidelines`, `/test-driven-development`) should be listed. Run `/agents` to see the subagents.
+Restart Claude Code, then type `/` — the skills (e.g. `/ponytail`, `/karpathy-guidelines`, `/humanizer`, `/test-driven-development`) should be listed. Run `/agents` to see the subagents.
 
 ### Alternative: install as plugins
 
@@ -111,6 +115,7 @@ Each repo also ships a Claude Code plugin marketplace, which brings hooks and co
 /plugin marketplace add addyosmani/agent-skills
 /plugin marketplace add multica-ai/andrej-karpathy-skills
 /plugin marketplace add DietrichGebert/ponytail
+/plugin marketplace add blader/humanizer
 /plugin marketplace add thedotmack/claude-mem
 ```
 
@@ -130,6 +135,7 @@ The files in this repository are licensed under [MIT](LICENSE).
 The submodules are separate projects under their own licenses (MIT, except claude-mem under Apache 2.0 and context-mode under Elastic License 2.0, at the time of writing):
 [agent-skills](agent-skills/LICENSE) © Addy Osmani,
 [ponytail](ponytail/LICENSE) © DietrichGebert,
+[humanizer](humanizer/LICENSE) © Siqi Chen,
 [andrej-karpathy-skills](andrej-karpathy-skills/README.md#license) © multica-ai,
 [claude-mem](claude-mem/LICENSE) © Alex Newman,
 [context-mode](context-mode/LICENSE) © Mert Koseoglu,

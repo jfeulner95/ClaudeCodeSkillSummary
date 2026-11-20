@@ -19,3 +19,6 @@
 [submodule "claude-howto"]
 	path = claude-howto
 	url = git@github.com:luongnv89/claude-howto.git
+[submodule "humanizer"]
+	path = humanizer
+	url = git@github.com:blader/humanizer.git
